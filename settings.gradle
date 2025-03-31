@@ -1,0 +1,3 @@
+rootProject.name = "LibWifi"
+include ':app'
+include ':wifi'
