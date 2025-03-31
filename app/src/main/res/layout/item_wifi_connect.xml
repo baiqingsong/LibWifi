@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rel_main"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_ssid"
+        style="@style/BlessServiceTvSmall"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:minWidth="145dp"
+        android:textSize="30sp"
+        android:text="SSID" />
+</RelativeLayout>
