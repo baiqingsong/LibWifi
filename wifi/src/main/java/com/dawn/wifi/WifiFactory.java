@@ -9,7 +9,9 @@ import android.os.Message;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WifiFactory {
     //单例
@@ -135,12 +137,24 @@ public class WifiFactory {
             @Override
             public void onScanResultsAvailable(List<ScanResult> scanResults) {
                 //扫描周围可用WiFi成功，设置可用WiFi列表
-                if(mScanResults != null){
+                // Use a HashSet to store unique SSIDs
+                Set<String> uniqueSSIDs = new HashSet<>();
+                List<ScanResult> uniqueScanResults = new ArrayList<>();
+
+                for (ScanResult scanResult : scanResults) {
+                    if (uniqueSSIDs.add(scanResult.SSID)) {
+                        uniqueScanResults.add(scanResult);
+                    }
+                }
+
+                // Clear the existing scan results and add the unique ones
+                if (mScanResults != null) {
                     mScanResults.clear();
-                    mScanResults.addAll(scanResults);
+                    mScanResults.addAll(uniqueScanResults);
                     List<String> wifiList = getSsidNameList();
-                    if(mListener != null)
+                    if (mListener != null) {
                         mListener.refreshWifiList(wifiList);
+                    }
                 }
             }
 
